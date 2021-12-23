@@ -26,7 +26,10 @@ class App extends Component {
       <div className="container mt-5 mb-5">
         <div className="row">
           <div className="col-md-6 offset-md-3">
-            <Preview></Preview>
+            <Preview
+              text={this.state.text}
+              userInput={this.state.userInput}
+            ></Preview>
             <textarea
               value={this.state.userInput}
               onChange={this.onUserInputChange}
