@@ -5,6 +5,10 @@ import Speed from "./Speed.js";
 const initialState = {
   text: "test",
   userInput: "",
+  symbols: 0,
+  sec: 0,
+  started: false,
+  finished: false,
 };
 
 class App extends Component {
@@ -18,8 +22,17 @@ class App extends Component {
     const v = e.target.value;
     this.setState({
       userInput: v,
+      symbols: this.countCorrectSymbols(v),
     });
   };
+
+  countCorrectSymbols(userInput) {
+    const text = this.text.replace(" ", "");
+    return userInput
+      .replace(" ", "")
+      .split("")
+      .filter((s, i) => s === text[i]).length;
+  }
 
   render() {
     return (
@@ -36,7 +49,7 @@ class App extends Component {
               className="form-control mb-3"
               placeholder="Start typing..."
             ></textarea>
-            <Speed></Speed>
+            <Speed sec={this.state.sec} symbols={this.state.symbols}></Speed>
             <div className="text-right">
               <button className="btn btn-light" onClick={this.onRestart}>
                 Restart
